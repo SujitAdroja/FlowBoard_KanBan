@@ -10,9 +10,10 @@ import PrivateRoutes from "./utils/PrivateRoutes";
 import store from "./app/store";
 import { Provider } from "react-redux";
 import BoardScreen from "./screens/BoardScreen";
-
+import data from "./data";
 function App() {
   const [login, setLogin] = useState(JSON.parse(localStorage.getItem("login")));
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
