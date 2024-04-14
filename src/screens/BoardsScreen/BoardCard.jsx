@@ -9,7 +9,7 @@ function BoardCard({ name, colorNo, date, id }) {
   const navigate = useNavigate();
 
   return (
-    <Grid item xs={12} sm={3}>
+    <Grid item xs={12} sm={6} md={3}>
       <Stack
         p={2}
         boxShadow={"0 0 10px rgba(0,0,0,0.3)"}

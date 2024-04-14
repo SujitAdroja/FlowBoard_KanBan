@@ -7,7 +7,7 @@ function BoardTab({ name, status, openAddTaskModel, tasks, removeTask }) {
   return (
     <Droppable droppableId={status}>
       {(provided) => (
-        <Grid {...provided} ref={provided.innerRef} item xs={12} sm={3}>
+        <Grid {...provided} ref={provided.innerRef} item xs={12} sm={6} md={3}>
           <Stack bgcolor={"white"} borderRadius={"20px"}>
             <Stack
               p={2}
