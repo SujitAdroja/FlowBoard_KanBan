@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import BoardTab from "./BoardTab";
-import { Grid } from "@mui/material";
+import { Grid, Hidden } from "@mui/material";
 import AddTaskModel from "./AddTaskModel";
 import { DragDropContext } from "react-beautiful-dnd";
 import { uid } from "uid";
@@ -74,7 +74,13 @@ function BoardInterface({ data, boardId, handleTabsData }) {
         />
       )}
       <DragDropContext onDragEnd={handleDnd}>
-        <Grid container mt={2} p={3} spacing={2}>
+        <Grid
+          container
+          mt={2}
+          mx={1}
+          spacing={1}
+          sx={{ background: "#F8F8F8", borderRadius: "10px" }}
+        >
           {Object.keys(statusMap).map((status) => {
             return (
               <BoardTab

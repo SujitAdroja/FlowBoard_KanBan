@@ -24,7 +24,8 @@ function Task({ text, id, removeTask, index, description, tasksList }) {
           spacing={1}
           px={2}
           py={1}
-          boxShadow={"0 0 10px rgba(0,0,0,0.1)"}
+          boxShadow={"0 0 8px rgba(0,0,0,0.2)"}
+          borderRadius={"10px"}
         >
           <Stack
             justifyContent={"space-between"}

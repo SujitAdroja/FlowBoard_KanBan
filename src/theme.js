@@ -12,7 +12,8 @@ export const colors = [
 const theme = createTheme({
   palette: {
     mode: "light",
-    primary: { main: "#BEA4FF" },
+    // primary: { main: "#BEA4FF" },
+    primary: { main: "#0CAFFF" },
     background: {
       default: "#FFF",
     },
@@ -25,7 +26,9 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Lato  ",
+    // fontFamily: "Lato  ",
+    // fontFamily: "Space Mono",
+    fontFamily: "Inconsolata",
     button: {
       textTransform: "unset",
       fontWeight: 600,

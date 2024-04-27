@@ -10,14 +10,20 @@ function BoardTopBar({ name, color, createdAt: date, boardId, deleteBoard }) {
   return (
     <AppBar
       sx={{
-        borderBottom: "5px solid",
-        borderColor: `${colors[color]}`,
+        boxShadow: "none",
         bgcolor: "white",
+        mt: "30px",
       }}
       position="static"
     >
-      <Toolbar sx={{ justifyContent: "space-between" }}>
-        <Stack spacing={1} direction={"row"} alignItems={"center"}>
+      <Toolbar
+        sx={{
+          padding: "10px !important",
+          justifyContent: "space-between",
+          alignItems: "start",
+        }}
+      >
+        <Stack spacing={3} direction={"row"} alignItems={"flex-start"}>
           <IconButton
             onClick={() => {
               navigate("/boards");
@@ -26,12 +32,16 @@ function BoardTopBar({ name, color, createdAt: date, boardId, deleteBoard }) {
           >
             <LeftArrow />
           </IconButton>
-          <Typography variant="h6">{name}</Typography>
+          <Stack spacing={1}>
+            <Typography variant="h4" color={colors[color]}>
+              {name}
+            </Typography>
+            <Typography display={{ xs: "none", sm: "block" }} variant="body2">
+              Last Updated : {date}
+            </Typography>
+          </Stack>
         </Stack>
-        <Stack spacing={2} direction={"row"} alignItems={"center"}>
-          <Typography display={{ xs: "none", sm: "block" }} variant="body2">
-            Last Updated : {date}
-          </Typography>
+        <Stack direction={"row"} mr={2} alignItems={"flex-start"}>
           <IconButton
             size="small"
             onClick={() => {
