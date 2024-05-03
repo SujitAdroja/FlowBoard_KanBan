@@ -11,6 +11,9 @@ const initForm = {
 function AauthScreen() {
   useEffect(() => {
     localStorage.setItem("login", false);
+    window.addEventListener("online", function () {
+      console.log("online");
+    });
   });
   const [login, setLogin] = useState(true);
   const [form, setForm] = useState(initForm);
@@ -51,6 +54,7 @@ function AauthScreen() {
           name="password"
           onChange={handleChange}
           label="Password"
+          type="password"
         />
         <Button
           disabled={!form.email.trim() || !form.password.trim()}

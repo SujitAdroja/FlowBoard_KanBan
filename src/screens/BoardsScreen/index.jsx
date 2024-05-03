@@ -5,25 +5,33 @@ import CreateBoardModel from "./CreateBoardModel";
 import BoardCard from "./BoardCard";
 import useApp from "../../hook";
 import NoBoards from "./NoBoards";
+import Loading from "../../feature/Loading";
 
 function BoardsScreen() {
   const [showModel, setShowModel] = useState(false);
   const { fetchBoards } = useApp();
   const [boards, setBoards] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const handleFetchedData = async function () {
+    setLoading(true);
+    const { boards } = await fetchBoards();
+    setBoards(boards);
+    setLoading(false);
+  };
   useEffect(() => {
-    const data = fetchBoards();
-    setBoards(data);
+    handleFetchedData();
   }, []);
+
   return (
     <>
       <TopBar openModel={() => setShowModel(true)} />
       {showModel && (
         <CreateBoardModel
           closeModal={() => setShowModel(false)}
-          fetchBoards={() => setBoards(fetchBoards())}
+          fetchBoards={() => handleFetchedData()}
         />
       )}
-
+      {/* {loading && <Loading />} */}
       {!boards.length ? (
         <NoBoards />
       ) : (
@@ -31,7 +39,7 @@ function BoardsScreen() {
           <Grid container spacing={{ sm: 4, xs: 2 }}>
             {boards.map((board, idx) => (
               <BoardCard
-                key={board.id}
+                key={board._id}
                 name={board.name}
                 colorNo={board.color}
                 date={board.createdAt}

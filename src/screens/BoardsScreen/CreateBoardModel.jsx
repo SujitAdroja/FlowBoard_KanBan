@@ -19,12 +19,17 @@ function CreateBoardModel({ closeModal, fetchBoards }) {
   const handleChange = function (event) {
     setName(event.target.value);
   };
-  const handleCreateBoard = () => {
-    if (!name.trim()) return;
-    if (name.length > 20) return;
-    CreateBoard({ name, color });
-    fetchBoards();
-    closeModal();
+  const handleCreateBoard = async () => {
+    try {
+      if (!name.trim()) return;
+      if (name.length > 20) return;
+      const data = await CreateBoard({ name, color });
+      if (!data) throw Error("No Board Created");
+      await fetchBoards();
+      closeModal();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

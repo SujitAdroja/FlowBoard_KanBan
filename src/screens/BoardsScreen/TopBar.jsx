@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Icon, Toolbar } from "@mui/material";
+import { AppBar, Icon, Toolbar, Typography } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/ExitToApp";
 import { Stack, Button, useMediaQuery, IconButton } from "@mui/material";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
@@ -20,7 +20,12 @@ function TopBar({ openModel }) {
           justifyContent: "space-between",
         }}
       >
-        <AcUnitIcon />
+        <Stack direction={"row"} spacing={2} alignItems={"center"}>
+          <AcUnitIcon />
+          <Typography variant="h5" fontWeight={500} letterSpacing={"1px"}>
+            <span style={{ color: "#0CAFFF" }}>Snow</span>Board
+          </Typography>
+        </Stack>
         <Stack direction={"row"} spacing={2}>
           {isXs ? (
             <>
@@ -49,7 +54,7 @@ function TopBar({ openModel }) {
                   navigate("/");
                 }}
               >
-                LogOut
+                Log Out
               </Button>
             </>
           )}

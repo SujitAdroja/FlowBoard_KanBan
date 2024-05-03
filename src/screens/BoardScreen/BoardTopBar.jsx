@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { colors } from "../../theme";
 import useApp from "../../hook";
 import { memo } from "react";
-function BoardTopBar({ name, color, createdAt: date, boardId, deleteBoard }) {
+function BoardTopBar({ name, color, createdAt, _id, deleteBoard }) {
   const navigate = useNavigate();
   return (
     <AppBar
@@ -37,7 +37,7 @@ function BoardTopBar({ name, color, createdAt: date, boardId, deleteBoard }) {
               {name}
             </Typography>
             <Typography display={{ xs: "none", sm: "block" }} variant="body2">
-              Last Updated : {date}
+              Last Updated : {createdAt}
             </Typography>
           </Stack>
         </Stack>
@@ -45,7 +45,7 @@ function BoardTopBar({ name, color, createdAt: date, boardId, deleteBoard }) {
           <IconButton
             size="small"
             onClick={() => {
-              deleteBoard(boardId);
+              deleteBoard(_id);
             }}
           >
             <DeleteIcon />

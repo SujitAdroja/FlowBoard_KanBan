@@ -4,7 +4,7 @@ import OpenIcon from "@mui/icons-material/Launch";
 import { colors } from "../../theme";
 import { useNavigate } from "react-router-dom";
 
-function BoardCard({ name, colorNo, date, id }) {
+function BoardCard({ name, colorNo, createdAt, _id }) {
   const [color, setColor] = useState(colors[colorNo]);
   const navigate = useNavigate();
 
@@ -32,11 +32,11 @@ function BoardCard({ name, colorNo, date, id }) {
               {name}
             </Typography>
           </Box>
-          <IconButton onClick={() => navigate(`/boards/${id}`)} size="small">
+          <IconButton onClick={() => navigate(`/boards/${_id}`)} size="small">
             <OpenIcon />
           </IconButton>
         </Stack>
-        <Typography variant="caption">Created at : {date}</Typography>
+        <Typography variant="caption">Created at : {createdAt}</Typography>
       </Stack>
     </Grid>
   );

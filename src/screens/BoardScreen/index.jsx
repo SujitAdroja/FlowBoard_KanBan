@@ -6,17 +6,23 @@ import useApp from "../../hook";
 
 function BoardScreen() {
   const { boardID } = useParams();
-  const { fetchBoards } = useApp();
+  const { fetchBoards, getSingleBoard, getTask } = useApp();
   const [singleBoard, setSingleBoard] = useState("");
   const [data, setData] = useState(null);
 
   useEffect(() => {
     handleTabsData();
   }, []);
-  const handleTabsData = () => {
-    const dataFetched = fetchBoards();
-    setSingleBoard(dataFetched.find((board) => board.id === boardID));
-    setData(dataFetched.find((board) => board.id === boardID).tabs);
+
+  const handleTabsData = async () => {
+    try {
+      const { board } = await getSingleBoard(boardID);
+      const tasks = await getTask(boardID);
+      setSingleBoard(board);
+      setData(tasks);
+    } catch (error) {
+      console.log(error);
+    }
   };
   const { deleteBoard } = useApp();
   const handleDeleteBoard = (boardId) => {
@@ -25,14 +31,11 @@ function BoardScreen() {
   };
   return (
     <>
-      <BoardTopBar
-        {...singleBoard}
-        boardId={singleBoard.id}
-        deleteBoard={handleDeleteBoard}
-      />
+      <BoardTopBar {...singleBoard} deleteBoard={handleDeleteBoard} />
+
       {!!data && (
         <BoardInterface
-          data={data}
+          data={data.tasks}
           boardId={boardID}
           handleTabsData={handleTabsData}
         />

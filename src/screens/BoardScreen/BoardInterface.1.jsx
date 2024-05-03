@@ -1,28 +1,25 @@
 import React, { useCallback, useState } from "react";
 import BoardTab from "./BoardTab";
-import { Grid, Hidden } from "@mui/material";
+import { Grid } from "@mui/material";
 import AddTaskModel from "./AddTaskModel";
 import { DragDropContext } from "react-beautiful-dnd";
 import { uid } from "uid";
 import useApp from "../../hook";
-const statusMap = {
-  notStarted: "Not Started",
-  inProgress: "In Progress",
-  blocked: "Blocked",
-  done: "Completed",
-};
-function BoardInterface({ data, boardId, handleTabsData }) {
+import { statusMap } from "./BoardInterface";
+
+export function BoardInterface({ data, boardId, handleTabsData }) {
   const [addTaskTo, setAddTaskTo] = useState("");
-  const [tabs, setTabs] = useState(structuredClone(data.tabs));
+  const [tabs, setTabs] = useState(structuredClone(data));
   const { updateBoardData } = useApp();
 
   const handleOpenAddTaskModel = useCallback(
     (status) => setAddTaskTo(status),
     []
   );
-  const handleUpdateBoardData = async (dClone) => {
-    await updateBoardData(boardId, dClone);
-    await handleTabsData();
+  const handleUpdateBoardData = (dClone) => {
+    console.log(dClone);
+    updateBoardData(boardId, dClone);
+    handleTabsData();
     setTabs(dClone);
   };
   const handleRemoveTask = useCallback(
@@ -54,7 +51,6 @@ function BoardInterface({ data, boardId, handleTabsData }) {
     const dClone = structuredClone(tabs);
 
     //remove the task from tab;
-
     const [draggedTask] = dClone[source.droppableId].splice(source.index, 1);
 
     //add it to the tab
@@ -84,7 +80,7 @@ function BoardInterface({ data, boardId, handleTabsData }) {
             return (
               <BoardTab
                 key={status}
-                tasks={data.tabs[status]}
+                tasks={data[status]}
                 name={statusMap[status]}
                 removeTask={handleRemoveTask}
                 status={status}
@@ -97,5 +93,3 @@ function BoardInterface({ data, boardId, handleTabsData }) {
     </>
   );
 }
-
-export default BoardInterface;
