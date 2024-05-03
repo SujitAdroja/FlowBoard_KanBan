@@ -98,9 +98,9 @@ const useApp = () => {
         // `http://localhost:3000/api/v1/boards/${boardId}`
         `https://snowboard-backend-s21l.onrender.com/api/v1/boards/${boardId}`
       );
+      navigate("/boards");
       if (res.statusText !== "OK")
         throw new Error("Not Able to delete the board");
-      navigate("/boards");
     } catch (error) {
       console.log(error);
     }
